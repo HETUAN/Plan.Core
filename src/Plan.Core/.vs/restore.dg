@@ -1,0 +1,6 @@
+#:E:\TUAN\Vs2015\Plan\src\Plan.Core\Bruce.Paln.Web\Bruce.Paln.Web.xproj
+E:\TUAN\Vs2015\Plan\src\Plan.Core\Bruce.Paln.Web\Bruce.Paln.Web.xproj|E:\TUAN\Vs2015\Plan\src\Plan.Core\Bruce.Paln.Entity\Bruce.Paln.Entity.xproj
+E:\TUAN\Vs2015\Plan\src\Plan.Core\Bruce.Paln.Web\Bruce.Paln.Web.xproj|E:\TUAN\Vs2015\Plan\src\Plan.Core\Bruce.Paln.Service\Bruce.Paln.Service.xproj
+E:\TUAN\Vs2015\Plan\src\Plan.Core\Bruce.Paln.Service\Bruce.Paln.Service.xproj|E:\TUAN\Vs2015\Plan\src\Plan.Core\Bruce.Paln.Entity\Bruce.Paln.Entity.xproj
+E:\TUAN\Vs2015\Plan\src\Plan.Core\Bruce.Paln.Service\Bruce.Paln.Service.xproj|E:\TUAN\Vs2015\Plan\src\Plan.Core\Bruce.Paln.Repository\Bruce.Paln.Repository.xproj
+E:\TUAN\Vs2015\Plan\src\Plan.Core\Bruce.Paln.Repository\Bruce.Paln.Repository.xproj|E:\TUAN\Vs2015\Plan\src\Plan.Core\Bruce.Paln.Entity\Bruce.Paln.Entity.xproj
