@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0",
-    "signature": "b86edc8f8ac9b85e51c8646007a86550b4b363a1"
+    "signature": "bfa3b06f9f74d8bae9ec43e8412cdf74e1610365"
   },
   "compilationOptions": {
     "defines": [
@@ -21,12 +21,16 @@
           "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
           "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
           "Microsoft.Extensions.Logging.Console": "1.0.0",
+          "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
+          "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.0",
           "Microsoft.AspNetCore.Mvc": "1.0.0",
-          "Bruce.Paln.Entity": "1.0.0",
-          "Bruce.Paln.Service": "1.0.0",
           "Microsoft.AspNetCore.StaticFiles": "1.1.0",
           "Microsoft.Extensions.Logging.Debug": "1.0.0",
-          "Microsoft.AspNetCore.Identity": "1.0.0"
+          "System.Security.Claims": "4.3.0",
+          "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
+          "Bruce.Paln.Entity": "1.0.0",
+          "Bruce.Paln.Service": "1.0.0",
+          "Bruce.Paln.Core": "1.0.0"
         },
         "runtime": {
           "Bruce.Paln.Web.dll": {}
@@ -148,20 +152,6 @@
         },
         "compile": {
           "lib/netstandard1.3/Microsoft.AspNetCore.Cryptography.Internal.dll": {}
-        }
-      },
-      "Microsoft.AspNetCore.Cryptography.KeyDerivation/1.0.0": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Cryptography.Internal": "1.0.0",
-          "System.Runtime.Extensions": "4.3.0",
-          "System.Security.Cryptography.Algorithms": "4.3.0",
-          "System.Text.Encoding.Extensions": "4.3.0"
-        },
-        "runtime": {
-          "lib/netstandard1.3/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {}
-        },
-        "compile": {
-          "lib/netstandard1.3/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {}
         }
       },
       "Microsoft.AspNetCore.DataProtection/1.0.0": {
@@ -378,20 +368,6 @@
         },
         "compile": {
           "lib/netstandard1.3/Microsoft.AspNetCore.HttpOverrides.dll": {}
-        }
-      },
-      "Microsoft.AspNetCore.Identity/1.0.0": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
-          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "1.0.0",
-          "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0",
-          "System.Text.RegularExpressions": "4.3.0"
-        },
-        "runtime": {
-          "lib/netstandard1.3/Microsoft.AspNetCore.Identity.dll": {}
-        },
-        "compile": {
-          "lib/netstandard1.3/Microsoft.AspNetCore.Identity.dll": {}
         }
       },
       "Microsoft.AspNetCore.JsonPatch/1.0.0": {
@@ -2251,6 +2227,9 @@
             "rid": "win",
             "assetType": "runtime"
           }
+        },
+        "compile": {
+          "ref/netstandard1.3/System.Security.Cryptography.Csp.dll": {}
         }
       },
       "System.Security.Cryptography.Encoding/4.3.0": {
@@ -2522,6 +2501,21 @@
         },
         "compile": {
           "ref/netstandard1.3/System.Xml.XDocument.dll": {}
+        }
+      },
+      "Bruce.Paln.Core/1.0.0": {
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "System.IO": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Security.Cryptography.Csp": "4.3.0",
+          "System.Text.Encoding": "4.3.0"
+        },
+        "runtime": {
+          "Bruce.Paln.Core.dll": {}
+        },
+        "compile": {
+          "Bruce.Paln.Core.dll": {}
         }
       },
       "Bruce.Paln.Entity/1.0.0": {
@@ -3353,11 +3347,6 @@
       "serviceable": true,
       "sha512": "sha512-0btvxwOqYNpKTUQrD7LA3p6Wi0vrhfWGBVqIKPS1KtEdkCv3QoVgFO4eJYuClGDS9NXhqk7TWh46/8x8wtZHaw=="
     },
-    "Microsoft.AspNetCore.Cryptography.KeyDerivation/1.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-OUBTk5RS7b3+Q9Z7F1jAL9JzdWlkITNpUw8EO5Yu1sP4Rq2jaidXKLiEw7oKFbD1Wmcee2s+U/UyHQfy/og7Sw=="
-    },
     "Microsoft.AspNetCore.DataProtection/1.0.0": {
       "type": "package",
       "serviceable": true,
@@ -3422,11 +3411,6 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-gHpdaaAzhaTWJZuJVo3ler2zzdQWrm8wnsoSjcNtoZZdTOkwImndRwK8o4GYoM18dfmfNheM7i4EENI7XHM/lA=="
-    },
-    "Microsoft.AspNetCore.Identity/1.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-qQXsxDocbx3xMPBVBZ2Es6vw5QalV+z9mGXUPbn/XRbjY1viwQjVToE7BrCanqr7q97ds0ciI2AgQhvny0kkqw=="
     },
     "Microsoft.AspNetCore.JsonPatch/1.0.0": {
       "type": "package",
@@ -4127,6 +4111,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-5zJ0XDxAIg8iy+t4aMnQAu0MqVbqyvfoUVl1yDV61xdo3Vth45oA2FoY4pPkxYAH5f8ixpmTqXeEIya95x0aCQ=="
+    },
+    "Bruce.Paln.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Bruce.Paln.Entity/1.0.0": {
       "type": "project",

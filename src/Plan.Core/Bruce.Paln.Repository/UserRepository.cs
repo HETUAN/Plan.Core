@@ -27,8 +27,7 @@ namespace Bruce.Paln.Repository
         public UserViewModel GetViewModel(int userId)
         {
             //
-            string sql = @"SELECT [UserID] 
-                              ,[UserName]
+            string sql = @"SELECT [UserName]
                               ,[Name]
                               ,[Sex] 
                               ,[Email] 

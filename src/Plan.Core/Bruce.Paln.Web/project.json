@@ -8,12 +8,16 @@
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
     "Microsoft.Extensions.Logging.Console": "1.0.0",
+    "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
+    "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.0",
-    "Bruce.Paln.Entity": "1.0.0-*",
-    "Bruce.Paln.Service": "1.0.0-*",
     "Microsoft.AspNetCore.StaticFiles": "1.1.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
-    "Microsoft.AspNetCore.Identity": "1.0.0"
+    "System.Security.Claims": "4.3.0",
+    "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
+    "Bruce.Paln.Entity": "1.0.0-*",
+    "Bruce.Paln.Service": "1.0.0-*",
+    "Bruce.Paln.Core": "1.0.0-*"
   },
 
   "tools": {
