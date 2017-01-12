@@ -18,7 +18,7 @@ namespace Bruce.Paln.Repository
                                 ,[CreateTime]
                                 ,[UpdateTime]
                             FROM [Note] WHERE Id = @Id";
-            return QuerySingle<NoteEntity>(OpenMsSqlConnection(), sql, new { Id = id });
+            return QuerySingle<NoteEntity>(OpenSqlConnection(), sql, new { Id = id });
         }
 
         public NoteEntity GetLastModel()
@@ -30,7 +30,7 @@ namespace Bruce.Paln.Repository
                                 ,[CreateTime]
                                 ,[UpdateTime]
                             FROM [Note] ORDER BY Id DESC";
-            return QuerySingle<NoteEntity>(OpenMsSqlConnection(), sql);
+            return QuerySingle<NoteEntity>(OpenSqlConnection(), sql);
         }
         public List<NoteViewModel> GetList(int userId)
         {
@@ -40,7 +40,7 @@ namespace Bruce.Paln.Repository
                                 ,[CreateTime]
                                 ,[UpdateTime]
                               FROM [Note] WHERE UserId = @UserId ORDER BY UpdateTime DESC";
-            return Query<NoteViewModel>(OpenMsSqlConnection(), sql, new { UserId = userId });
+            return Query<NoteViewModel>(OpenSqlConnection(), sql, new { UserId = userId });
         }
 
 
@@ -62,7 +62,7 @@ namespace Bruce.Paln.Repository
             if (title.Trim() != "")
                 where.Add("Ttile LIKE '%'+@Title+'%'");
 
-            using (System.Data.IDbConnection connection = OpenMsSqlConnection())
+            using (System.Data.IDbConnection connection = OpenSqlConnection())
             {
 
                 var qsql = string.Format(sql, where.Count > 0 ? " AND " : "" + string.Join(" AND ", where));
@@ -87,7 +87,7 @@ namespace Bruce.Paln.Repository
                                        ,@Title
                                        ,GETDATE()
                                        ,GETDATE())";
-            return Execute(OpenMsSqlConnection(), sql, model);
+            return ExecuteNonQuery(OpenSqlConnection(), sql, model);
         }
 
 
@@ -98,14 +98,14 @@ namespace Bruce.Paln.Repository
                                               ,[Note] = @Note  
                                               ,[UpdateTime] = GETDATE()
                                          WHERE Id = @Id";
-            return Execute(OpenMsSqlConnection(), sql, model);
+            return ExecuteNonQuery(OpenSqlConnection(), sql, model);
         }
 
 
         public int Delete(int id)
         {
             string sql = @"DELETE FROM [Daily] WHERE Id = @Id";
-            return Execute(OpenMsSqlConnection(), sql, new { Id = id });
+            return ExecuteNonQuery(OpenSqlConnection(), sql, new { Id = id });
         }
     }
 }

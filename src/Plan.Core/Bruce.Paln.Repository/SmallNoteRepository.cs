@@ -24,7 +24,7 @@ namespace Bruce.Paln.Repository
                                 ,[CreateTime]
                                 ,[UpdateTime]
                               FROM [SmallNote] WHERE UserId = @UserId ORDER BY AddTime";
-            return Query<SmallNoteEntity>(OpenMsSqlConnection(), sql, new { UserId = userId });
+            return Query<SmallNoteEntity>(OpenSqlConnection(), sql, new { UserId = userId });
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Bruce.Paln.Repository
                                 ,[CreateTime]
                                 ,[UpdateTime]
                               FROM [SmallNote] WHERE UserId = @UserId AND NState = @NState ORDER BY CreateTime";
-            return Query<SmallNoteEntity>(OpenMsSqlConnection(), sql, new { UserId = userId, NState = state });
+            return Query<SmallNoteEntity>(OpenSqlConnection(), sql, new { UserId = userId, NState = state });
         }
 
         public List<SmallNoteEntity> GetList(int userId, int pageIndex, int pageSize, string title, out int rows)
@@ -64,7 +64,7 @@ namespace Bruce.Paln.Repository
             if (title.Trim() != "")
                 where.Add("Ttile LIKE '%'+@Title+'%'");
 
-            using (System.Data.IDbConnection connection = OpenMsSqlConnection())
+            using (System.Data.IDbConnection connection = OpenSqlConnection())
             {
                 var qsql = string.Format(sql, where.Count > 0 ? " AND " : "" + string.Join(" AND ", where));
                 var multi = connection.QueryMultiple(qsql, new { UserId = userId, StartIndex = (pageIndex - 1) * pageSize, EndIndex = pageIndex * pageSize, Title = title });
@@ -88,7 +88,7 @@ namespace Bruce.Paln.Repository
                                        ,@NState
                                        ,GETDATE()
                                        ,GETDATE())";
-            return Execute(OpenMsSqlConnection(), sql, model);
+            return ExecuteNonQuery(OpenSqlConnection(), sql, model);
         }
 
         public int Update(NoteEntity model)
@@ -98,7 +98,7 @@ namespace Bruce.Paln.Repository
                                               ,[NState] = @NState
                                               ,[UpdateTime] = GETDATE()
                                          WHERE Id = @Id AND UserID = @UserId";
-            return Execute(OpenMsSqlConnection(), sql, model);
+            return ExecuteNonQuery(OpenSqlConnection(), sql, model);
         }
 
         public int UpdateState(int id, int state, int userId)
@@ -107,7 +107,7 @@ namespace Bruce.Paln.Repository
                                            SET [NState] = @NState
                                               ,[UpdateTime] = GETDATE()
                                          WHERE Id = @Id AND UserID = @UserId";
-            return Execute(OpenMsSqlConnection(), sql, new { Id = id, NState = state, UserId = userId });
+            return ExecuteNonQuery(OpenSqlConnection(), sql, new { Id = id, NState = state, UserId = userId });
         }
 
         public int UpdateNote(int id, string note, int userId)
@@ -116,13 +116,13 @@ namespace Bruce.Paln.Repository
                                            SET [Note] = @Note 
                                               ,[UpdateTime] = GETDATE()
                                          WHERE Id = @Id AND UserID = @UserId";
-            return Execute(OpenMsSqlConnection(), sql, new { Id = id, Note = note, UserId = userId });
+            return ExecuteNonQuery(OpenSqlConnection(), sql, new { Id = id, Note = note, UserId = userId });
         }
 
         public int Delete(int id, int userId)
         {
             string sql = @"DELETE FROM [SmallNote] WHERE Id = @Id AND UserID = @UserId";
-            return Execute(OpenMsSqlConnection(), sql, new { Id = id, UserId = userId });
+            return ExecuteNonQuery(OpenSqlConnection(), sql, new { Id = id, UserId = userId });
         }
 
         public int IsNoteExist(int userId, string note, int id)
@@ -133,7 +133,7 @@ namespace Bruce.Paln.Repository
                 where = " AND Id <> @Id ";
             }
             string sql = string.Format("SELECT COUNT(1) FROM [SmallNote] WHERE UserId = @UserId AND Note = @Note {0}", where);
-            return QuerySingle<int>(OpenMsSqlConnection(), sql, new { UserId = userId, Note = note, Id = id });
+            return QuerySingle<int>(OpenSqlConnection(), sql, new { UserId = userId, Note = note, Id = id });
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Bruce.Paln.Entity;
 using Bruce.Paln.Entity.ViewModel;
+using Bruce.Paln.Repository;
 
 namespace Bruce.Paln.Repository
 {
@@ -27,7 +28,7 @@ namespace Bruce.Paln.Repository
                                    ,@Answer
                                    ,GETDATE()
                                    ,GETDATE())";
-            return base.Execute(base.OpenMsSqlConnection(), sql, new { UserId = entity.UserId, LeetCodeId = entity.LeetCodeId, Status = entity.Status, Answer = entity.Answer });
+            return base.ExecuteNonQuery(base.OpenSqlConnection(), sql, new { UserId = entity.UserId, LeetCodeId = entity.LeetCodeId, Status = entity.Status, Answer = entity.Answer });
         }
 
         public int Update(LeetAnswerEntity entity)
@@ -37,7 +38,7 @@ namespace Bruce.Paln.Repository
                                   ,[Answer] = @Answer
                                   ,[UpdateTime] = GETDATE()
                              WHERE [UserId] = @UserId AND [LeetCodeId] = @LeetCodeId ";
-            return base.Execute(base.OpenMsSqlConnection(), sql, new { UserId = entity.UserId, LeetCodeId = entity.LeetCodeId, Status = entity.Status, Answer = entity.Answer });
+            return base.ExecuteNonQuery(base.OpenSqlConnection(), sql, new { UserId = entity.UserId, LeetCodeId = entity.LeetCodeId, Status = entity.Status, Answer = entity.Answer });
         }
 
 
@@ -47,7 +48,7 @@ namespace Bruce.Paln.Repository
                                SET [Status] = @Status 
                                   ,[UpdateTime] = GETDATE()
                              WHERE [UserId] = @UserId AND [LeetCodeId] = @LeetCodeId ";
-            return base.Execute(base.OpenMsSqlConnection(), sql, new { UserId = userId, LeetCodeId = leetCodeId, Status = status });
+            return base.ExecuteNonQuery(base.OpenSqlConnection(), sql, new { UserId = userId, LeetCodeId = leetCodeId, Status = status });
         }
 
         public LeetQuestionEntity GetNextLeetQuestion(int userId)
@@ -61,7 +62,7 @@ namespace Bruce.Paln.Repository
                                   LEFT JOIN  (SELECT * FROM Leet_Answer WHERE UserId = @UserId )la 
                                   ON la.LeetCodeId = lq.QuestionId 
                                   WHERE la.Status IS NULL OR la.status = 0 ORDER BY lq.[QuestionId] ";
-            return base.QuerySingle<LeetQuestionEntity>(OpenMsSqlConnection(), sql,
+            return base.QuerySingle<LeetQuestionEntity>(OpenSqlConnection(), sql,
                 new
                 {
                     UserId = userId
@@ -84,7 +85,7 @@ namespace Bruce.Paln.Repository
                             FROM [Leet_Question] LQ LEFT JOIN (SELECT * FROM Leet_Answer WHERE UserId =  @UserId) LA 
                             ON LA.LeetCodeId = LQ.QuestionId 
                             ORDER BY LQ.QuestionId";
-            return base.Query<LeetQuestionViewModel>(OpenMsSqlConnection(), sql,
+            return base.Query<LeetQuestionViewModel>(OpenSqlConnection(), sql,
                 new
                 {
                     UserId = userId

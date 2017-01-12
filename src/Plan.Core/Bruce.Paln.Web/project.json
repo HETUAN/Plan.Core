@@ -17,7 +17,8 @@
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Bruce.Paln.Entity": "1.0.0-*",
     "Bruce.Paln.Service": "1.0.0-*",
-    "Bruce.Paln.Core": "1.0.0-*"
+    "Bruce.Paln.Core": "1.0.0-*",
+    "MySql.Data": "7.0.6-IR31"
   },
 
   "tools": {

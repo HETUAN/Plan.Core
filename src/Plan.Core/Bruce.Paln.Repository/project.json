@@ -5,7 +5,8 @@
     "NETStandard.Library": "1.6.0",
     "System.Data.SqlClient": "4.1.0",
     "Dapper": "1.50.2",
-    "Bruce.Paln.Entity": "1.0.0-*"
+    "Bruce.Paln.Entity": "1.0.0-*",
+    "MySql.Data": "7.0.6-IR31"
   },
 
   "frameworks": {

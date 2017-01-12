@@ -11,7 +11,7 @@ namespace Bruce.Paln.Repository
                               ,[Result]
                               ,[Summary]
                           FROM [PlanResult] WHERE PlanId = @PlanId";
-            return QuerySingle<PlanResultEntity>(OpenMsSqlConnection(), sql, new { PlanId = id });
+            return QuerySingle<PlanResultEntity>(OpenSqlConnection(), sql, new { PlanId = id });
         }
 
         public int Insert(PlanResultEntity model)
@@ -24,7 +24,7 @@ namespace Bruce.Paln.Repository
                                (@PlanId, 
                                 @Result, 
                                 @Summary)";
-            return Execute(OpenMsSqlConnection(), sql, model);
+            return ExecuteNonQuery(OpenSqlConnection(), sql, model);
         }
 
         public int Update(PlanResultEntity model)
@@ -33,7 +33,7 @@ namespace Bruce.Paln.Repository
                                SET [Result] = @Result 
                                   ,[Summary] = @Summary 
                              WHERE [PlanId] = @PlanId";
-            return Execute(OpenMsSqlConnection(), sql, model);
+            return ExecuteNonQuery(OpenSqlConnection(), sql, model);
         }
 
         public bool ExistResult(int planId)
@@ -41,7 +41,7 @@ namespace Bruce.Paln.Repository
             //
             string sql = @"SELECT COUNT(1)
                           FROM [PlanResult] WHERE PlanId = @PlanId";
-            return QuerySingle<int>(OpenMsSqlConnection(), sql, new { PlanId = planId }) > 0;
+            return QuerySingle<int>(OpenSqlConnection(), sql, new { PlanId = planId }) > 0;
         }
 
     }

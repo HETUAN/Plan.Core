@@ -38,7 +38,7 @@ namespace Bruce.Paln.Repository
                                    ,@UseTime
                                    ,GETDATE()
                                    ,GETDATE())";
-            return Execute(OpenMsSqlConnection(), sql, entity);
+            return ExecuteNonQuery(OpenSqlConnection(), sql, entity);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Bruce.Paln.Repository
                                   ,[UseTime] = @UseTime
                                   ,[UpdateTime] = GETDATE() 
                              WHERE Id = @Id";
-            return Execute(OpenMsSqlConnection(), sql, entity) > 0;
+            return ExecuteNonQuery(OpenSqlConnection(), sql, entity) > 0;
         }
 
         public UserPlanEntity GetModel(int id)
@@ -77,7 +77,7 @@ namespace Bruce.Paln.Repository
                               ,[CreateTime]
                               ,[UpdateTime]
                           FROM [UserPlan] WHERE Id = @Id";
-            return QuerySingle<UserPlanEntity>(OpenMsSqlConnection(), sql, new { Id = id });
+            return QuerySingle<UserPlanEntity>(OpenSqlConnection(), sql, new { Id = id });
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Bruce.Paln.Repository
                               ,[CreateTime]
                               ,[UpdateTime]
                           FROM [UserPlan]";
-            return Query<UserPlanEntity>(OpenMsSqlConnection(), sql);
+            return Query<UserPlanEntity>(OpenSqlConnection(), sql);
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Bruce.Paln.Repository
                                   ,Result
                                   ,Summary
                               FROM [VIEW_UserPlan] ORDER BY HappenTime";
-            return Query<UserPlanViewModel>(OpenMsSqlConnection(), sql);
+            return Query<UserPlanViewModel>(OpenSqlConnection(), sql);
         }
 
 
@@ -158,7 +158,7 @@ namespace Bruce.Paln.Repository
                                   ,Result
                                   ,Summary
                               FROM [VIEW_UserPlan]  WHERE UserId = @UserId AND HappenTime BETWEEN @startTime AND @endTime  ORDER BY HappenTime";
-            return Query<UserPlanViewModel>(OpenMsSqlConnection(), sql, new { UserId = userId, startTime = startTime, endTime = endTime });
+            return Query<UserPlanViewModel>(OpenSqlConnection(), sql, new { UserId = userId, startTime = startTime, endTime = endTime });
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Bruce.Paln.Repository
         public int Delete(int entityId)
         {
             string sql = "DELETE FROM [UserPlan] WHERE Id = @Id";
-            return Execute(OpenMsSqlConnection(), sql, new { Id = entityId });
+            return ExecuteNonQuery(OpenSqlConnection(), sql, new { Id = entityId });
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace Bruce.Paln.Repository
                             OR  (@T2>HappenTime AND @T2 < DATEADD(n,UseTime, HappenTime) ) 
                             OR  (@T2>HappenTime AND @T1 < HappenTime ) 
                             OR  (@T2>DATEADD(n,UseTime, HappenTime) AND @T1 < DATEADD(n,UseTime, HappenTime) ) )";
-            return QuerySingle<int>(OpenMsSqlConnection(), sql, new { UserId = userId, T1 = startTime, T2 = endTime });
+            return QuerySingle<int>(OpenSqlConnection(), sql, new { UserId = userId, T1 = startTime, T2 = endTime });
         }
 
     }

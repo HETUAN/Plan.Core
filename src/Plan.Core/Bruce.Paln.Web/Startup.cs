@@ -40,7 +40,7 @@ namespace Bruce.Paln.Web
                 AuthenticationScheme = "UserAuth",　   // Cookie 验证方案名称，后面多处都需要用到，部分地方必须要求常量，所以直接配置为字符串。
                 AutomaticAuthenticate = true,     // 是否自动启用验证，如果不启用，则即便客服端传输了Cookie信息，服务端也不会主动解析。
                                                   // 除了明确配置了 [Authorize(ActiveAuthenticationSchemes = "上面的方案名")] 属性的地方，才会解析，此功能一般用在需要在同一应用中启用多种验证方案的时候。比如分Area.
-                LoginPath = "/User/Index"　　　　　// 登录页
+                LoginPath = "/User/Index",　　　　// 登录页
                 AccessDeniedPath = "/Error"
             });
 

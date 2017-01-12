@@ -1,4 +1,4 @@
-﻿using Bruce.Paln.Entity.ViewModel;
+﻿using Bruce.Paln.Entity.ViewModel; 
 
 namespace Bruce.Paln.Repository
 {
@@ -13,7 +13,7 @@ namespace Bruce.Paln.Repository
                               ,[Sex] 
                               ,[Email] 
                           FROM [Users] WHERE UserName = @UserName AND PassWord = @PassWord";
-            return QuerySingle<UserViewModel>(OpenMsSqlConnection(), sql, new { UserName = userName, PassWord = passWord });
+            return QuerySingle<UserViewModel>(OpenSqlConnection(), sql, new { UserName = userName, PassWord = passWord });
         }
 
         public int UserExist(int id, string passWord)
@@ -21,7 +21,7 @@ namespace Bruce.Paln.Repository
             //
             string sql = @"SELECT COUNT(UserID)
                           FROM [Users] WHERE UserID = @UserID AND PassWord = @PassWord";
-            return QuerySingle<int>(OpenMsSqlConnection(), sql, new { UserID = id, PassWord = passWord });
+            return QuerySingle<int>(OpenSqlConnection(), sql, new { UserID = id, PassWord = passWord });
         }
 
         public UserViewModel GetViewModel(int userId)
@@ -32,7 +32,7 @@ namespace Bruce.Paln.Repository
                               ,[Sex] 
                               ,[Email] 
                           FROM [Users] WHERE UserID = @UserID";
-            return QuerySingle<UserViewModel>(OpenMsSqlConnection(), sql, new { UserID = userId });
+            return QuerySingle<UserViewModel>(OpenSqlConnection(), sql, new { UserID = userId });
         }
     }
 }

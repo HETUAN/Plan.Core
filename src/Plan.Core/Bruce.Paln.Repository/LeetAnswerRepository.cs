@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Bruce.Paln.Entity;
-using Bruce.Paln.Entity.LeetCode;
+using Bruce.Paln.Entity.LeetCode; 
 
 namespace Bruce.Paln.Repository
 {
@@ -12,7 +12,7 @@ namespace Bruce.Paln.Repository
                                         ([UserId],[LeetCodeId],[Status],[Answer])
                                     VALUES
                                         (@UserId,@LeetCodeId,@STATUS,@Answer)";
-            return base.Execute(OpenMsSqlConnection(), sql, entity);
+            return base.ExecuteNonQuery(OpenSqlConnection(), sql, entity);
         }
 
         public int Update(LeetAnswerEntity entity)

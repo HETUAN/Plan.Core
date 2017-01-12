@@ -80,14 +80,11 @@ namespace Bruce.Paln.Web.Controllers
         private async void WriteUser(int userId, string userName)
         {
             var identity = new ClaimsIdentity("Forms");     // 指定身份认证类型
-
-            identity.AddClaim(new Claim(ClaimTypes.Sid, userId.ToString()));　　// 用户Id
-
-            identity.AddClaim(new Claim(ClaimTypes.Name, userName));　　　　　　 // 用户名称
-
+            identity.AddClaim(new Claim(ClaimTypes.Sid, userId.ToString()));  // 用户Id
+            identity.AddClaim(new Claim(ClaimTypes.Name, userName));       // 用户名称
             var principal = new ClaimsPrincipal(identity);
-
-            await HttpContext.Authentication.SignInAsync("UserAuth", principal, new AuthenticationProperties { IsPersistent = true });
+            //await HttpContext.Authentication.SignInAsync("UserAuth", principal, new AuthenticationProperties { IsPersistent = true, ExpiresUtc= DateTime.UtcNow.AddMinutes(20) });
+            await HttpContext.Authentication.SignInAsync("UserAuth", principal, new AuthenticationProperties { IsPersistent = true});
         }
 
         private int GetUserId()

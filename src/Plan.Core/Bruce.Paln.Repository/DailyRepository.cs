@@ -19,7 +19,7 @@ namespace Bruce.Paln.Repository
                                   ,[CreateTime]
                                   ,[UpdateTime]
                               FROM [Daily] WHERE UserId = @UserId AND DailyDate = @DailyDate";
-            return QuerySingle<DailyEntity>(OpenMsSqlConnection(), sql, new { UserId = userId, DailyDate = date.Date });
+            return QuerySingle<DailyEntity>(OpenSqlConnection(), sql, new { UserId = userId, DailyDate = date.Date });
         }
 
         public DailyEntity GetModel(int id)
@@ -32,7 +32,7 @@ namespace Bruce.Paln.Repository
                                   ,[CreateTime]
                                   ,[UpdateTime]
                               FROM [Daily] WHERE Id = @Id";
-            return QuerySingle<DailyEntity>(OpenMsSqlConnection(), sql, new { Id = id });
+            return QuerySingle<DailyEntity>(OpenSqlConnection(), sql, new { Id = id });
         }
 
         public List<DailyViewModel> GetList(int userId)
@@ -44,7 +44,7 @@ namespace Bruce.Paln.Repository
                                   ,[CreateTime]
                                   ,[UpdateTime]
                               FROM [Daily] WHERE UserId = @UserId ORDER BY UpdateTime DESC";
-            return Query<DailyViewModel>(OpenMsSqlConnection(), sql, new { UserId = userId });
+            return Query<DailyViewModel>(OpenSqlConnection(), sql, new { UserId = userId });
         }
 
         public List<DailyViewModel> GetList(int userId, int pageIndex, int pageSize, string title, DateTime? date, out int rows)
@@ -67,7 +67,7 @@ namespace Bruce.Paln.Repository
                 where.Add("Ttile LIKE '%'+@Title+'%'");
             if (date != null)
             {
-                using (System.Data.IDbConnection connection = OpenMsSqlConnection())
+                using (System.Data.IDbConnection connection = OpenSqlConnection())
                 {
                     where.Add("DailyDate = @DailyDate");
                     var qsql = string.Format(sql, where.Count > 0 ? " AND " : "" + string.Join(" AND ", where));
@@ -80,7 +80,7 @@ namespace Bruce.Paln.Repository
             else
             {
 
-                using (System.Data.IDbConnection connection = OpenMsSqlConnection())
+                using (System.Data.IDbConnection connection = OpenSqlConnection())
                 {
                     var qsql = string.Format(sql, where.Count > 0 ? " AND " : "" + string.Join(" AND ", where));
                     var multi = connection.QueryMultiple(qsql, new { UserId = userId, StartIndex = (pageIndex - 1) * pageSize, EndIndex = pageIndex * pageSize, Title = title });
@@ -107,7 +107,7 @@ namespace Bruce.Paln.Repository
                                        ,@Summary
                                        ,GETDATE()
                                        ,GETDATE())";
-            return Execute(OpenMsSqlConnection(), sql, new
+            return ExecuteNonQuery(OpenSqlConnection(), sql, new
             {
                 UserId = model.UserId,
                 DailyDate = model.DailyDate.Date,
@@ -124,7 +124,7 @@ namespace Bruce.Paln.Repository
                                               ,[Summary] = @Summary
                                               ,[UpdateTime] = GETDATE()
                                          WHERE Id = @Id";
-            return Execute(OpenMsSqlConnection(), sql, new
+            return ExecuteNonQuery(OpenSqlConnection(), sql, new
             {
                 Id = model.Id,
                 Title = model.Title,
@@ -136,19 +136,19 @@ namespace Bruce.Paln.Repository
         public int Delete(int id)
         {
             string sql = @"DELETE FROM [Daily] WHERE Id = @Id";
-            return Execute(OpenMsSqlConnection(), sql, new { Id = id });
+            return ExecuteNonQuery(OpenSqlConnection(), sql, new { Id = id });
         }
 
         public int Count(DateTime today)
         {
             string sql = "SELECT COUNT(*) FROM Daily WHERE DailyDate = @Today";
-            return QuerySingle<int>(OpenMsSqlConnection(), sql, new { Today = today.Date });
+            return QuerySingle<int>(OpenSqlConnection(), sql, new { Today = today.Date });
         }
 
         public bool Exist(int id)
         {
             string sql = "SELECT COUNT(*) FROM Daily WHERE Id = @id";
-            return QuerySingle<int>(OpenMsSqlConnection(), sql, new { Id = id }) > 0;
+            return QuerySingle<int>(OpenSqlConnection(), sql, new { Id = id }) > 0;
         }
 
     }
