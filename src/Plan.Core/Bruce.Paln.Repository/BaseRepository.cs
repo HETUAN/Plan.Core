@@ -54,7 +54,7 @@ namespace Bruce.Paln.Repository
     public abstract class BaseRepository
     {
 
-        protected string ConnStr = "server=52.197.53.214;database=bbs;uid=bruce;pwd=bruce@*#%;charset='utf8';SslMode=None";
+        protected string ConnStr = "";
         protected MySqlConnection OpenSqlConnection()
         {
             // 
